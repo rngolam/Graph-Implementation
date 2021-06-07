@@ -46,42 +46,109 @@ class UndirectedGraph:
         """
         Add new vertex to the graph
         """
+        if v in self.adj_list:
+            return
         
+        self.adj_list[v] = []
         
     def add_edge(self, u: str, v: str) -> None:
         """
         Add edge to the graph
         """
+        if u == v:
+            return
+
+        if u not in self.adj_list:
+            self.add_vertex(u)
+
+        if v not in self.adj_list:
+            self.add_vertex(v)
+
+        if v in self.adj_list[u]:
+            return
+
+        self.adj_list[u].append(v)
+        self.adj_list[v].append(u)
         
 
     def remove_edge(self, v: str, u: str) -> None:
         """
         Remove edge from the graph
         """
+        if u not in self.adj_list or v not in self.adj_list:
+            return
+
+        # Attempt to remove edge from adjacency lists if it exists
+        try:
+            self.adj_list[u].remove(v)
+            self.adj_list[v].remove(u)
+        except ValueError:
+            return
         
 
     def remove_vertex(self, v: str) -> None:
         """
         Remove vertex and all connected edges
         """
+        if v not in self.adj_list:
+            return
+
+        # Remove all edges connected to parameterized vertex
+        for vertex in self.adj_list:
+            self.remove_edge(v, vertex)
         
+        # Remove parameterized vertex from adjacency lists
+        del self.adj_list[v]
 
     def get_vertices(self) -> []:
         """
         Return list of vertices in the graph (any order)
         """
+        res = []
+        
+        for vertex in self.adj_list:
+            res.append(vertex)
+
+        return res
        
 
     def get_edges(self) -> []:
         """
         Return list of edges in the graph (any order)
         """
-        
+        res = set()
 
+        for vertex_1 in self.adj_list:
+
+            for vertex_2 in self.adj_list[vertex_1]:
+
+                # Check whether permutation of vertices was already accounted for
+                if (vertex_2, vertex_1) not in res:
+                    res.add((vertex_1, vertex_2))
+        
+        return list(res)
+
+        
     def is_valid_path(self, path: []) -> bool:
         """
         Return true if provided path is valid, False otherwise
         """
+
+        last_visited = None
+
+        for vertex in path:
+
+            if vertex not in self.adj_list:
+                return False
+
+            # Check if edge exists from last visited vertex to current vertex
+            if last_visited and vertex not in self.adj_list[last_visited]:
+                return False
+
+            # Update last visited vertex
+            last_visited = vertex
+
+        return True
        
 
     def dfs(self, v_start, v_end=None) -> []:
@@ -89,20 +156,78 @@ class UndirectedGraph:
         Return list of vertices visited during DFS search
         Vertices are picked in alphabetical order
         """
-       
+        path = []
+
+        if v_start not in self.adj_list:
+            return path
+
+        visited = set()
+        stack = deque()
+
+        stack.append(v_start)
+
+        while len(stack) > 0:
+
+            current = stack.pop()
+
+            if current == v_end:
+                path.append(current)
+                break
+
+            if current not in visited:
+                visited.add(current)
+                path.append(current)
+
+                # Sort adjacency list in reverse-lexicographical order so that
+                # vertices at the beginning of the alphabet are at the top of
+                # the stack
+                self.adj_list[current].sort(reverse=True)
+
+                for vertex in self.adj_list[current]:
+                    stack.append(vertex)
+
+        return path
 
     def bfs(self, v_start, v_end=None) -> []:
         """
         Return list of vertices visited during BFS search
         Vertices are picked in alphabetical order
         """
+        path = []
+
+        if v_start not in self.adj_list:
+            return path
+
+        visited = set()
+        queue = deque()
+
+        queue.append(v_start)
+
+        while len(queue) > 0:
+
+            current = queue.popleft()
+
+            if current == v_end:
+                path.append(current)
+                break
+
+            if current not in visited:
+                visited.add(current)
+                path.append(current)
+
+                self.adj_list[current].sort()
+
+                for vertex in self.adj_list[current]:
+                    queue.append(vertex)
+
+        return path
         
 
     def count_connected_components(self):
         """
-        Return number of connected componets in the graph
+        Return number of connected components in the graph
         """
-      
+        connected
 
     def has_cycle(self):
         """
