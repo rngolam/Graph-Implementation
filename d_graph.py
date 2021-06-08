@@ -203,35 +203,67 @@ class DirectedGraph:
         """
         TODO: Write this implementation
         """
-        for i in range(len(self.adj_matrix)):
+        unvisited = {x for x in range(len(self.adj_matrix))}
+        visiting = set()
+        visited = set()
 
-            if self.has_cycle_rec(i):
+        while len(unvisited) > 0:
+
+            vertex = unvisited.pop()
+
+            if self.has_cycle_rec(vertex, unvisited, visiting, visited):
                 return True
 
         return False
 
     
-    def has_cycle_rec(self, vertex, last_visited=None, visited=None):
+    def has_cycle_rec(self, vertex, unvisited, visiting, visited):
         """
         """
-        if visited is None:
-            visited = set()
+        # if visited is None:
+        #     visited = set()
 
-        # We can't consider a vertex visited until we finish fully processing it
-        if last_visited:
-            visited.add(last_visited)
+        # # We can't consider a vertex visited until we finish fully processing it
+        # if last_visited:
+        #     visited.add(last_visited)
+
+        # for successor in range(len(self.adj_matrix[vertex])):
+
+        #     if self.adj_matrix[vertex][successor] != 0:
+
+        #         if successor in visited and successor != last_visited:
+        #             return True
+
+        #         if successor not in visited:
+        #             if self.has_cycle_rec(successor, vertex, visited):
+        #                 return True
+
+        # return False
+
+        try:
+            unvisited.remove(vertex)
+        except KeyError:
+            pass
+        
+        visiting.add(vertex)
 
         for successor in range(len(self.adj_matrix[vertex])):
 
             if self.adj_matrix[vertex][successor] != 0:
 
-                if successor in visited and successor != last_visited:
+                if successor in visiting:
                     return True
 
                 if successor not in visited:
-                    if self.has_cycle_rec(successor, vertex, visited):
-                        return True
 
+                    if self.has_cycle_rec(successor, unvisited, visiting, visited):
+                        return True
+        
+        # We have finished processing a vertex once we have finished processing
+        # all of its children
+        visiting.remove(vertex)
+        visited.add(vertex)
+        
         return False
 
 
