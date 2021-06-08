@@ -241,14 +241,37 @@ class UndirectedGraph:
         return connected_count
 
 
-
     def has_cycle(self):
         """
         Return True if graph contains a cycle, False otherwise
         """
-       
+        for vertex in self.adj_list:
+            if self.has_cycle_helper(vertex):
+                return True
+        
+        return False
 
-   
+    def has_cycle_helper(self, vertex, last_visited=None, visited=None, path=None):
+        """
+        """
+        if visited is None:
+            visited = set()
+
+        if path is None:
+            path = []
+
+        visited.add(vertex)
+        path.append(vertex)
+
+        for neighbor in self.adj_list[vertex]:
+            
+            if neighbor in visited and neighbor != last_visited:
+                return True
+
+            if neighbor not in visited and self.has_cycle_helper(neighbor, vertex, visited, path):
+                return True
+
+        return False
 
 
 if __name__ == '__main__':
