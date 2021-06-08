@@ -227,7 +227,20 @@ class UndirectedGraph:
         """
         Return number of connected components in the graph
         """
-        connected
+        vertices = set(self.adj_list.keys())
+
+        connected_count = 0
+
+        while len(vertices) > 0:
+            
+            vertex = vertices.pop()
+            connected = set(self.dfs(vertex))
+            vertices -= connected
+            connected_count += 1
+
+        return connected_count
+
+
 
     def has_cycle(self):
         """
