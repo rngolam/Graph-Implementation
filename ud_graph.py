@@ -50,7 +50,8 @@ class UndirectedGraph:
             return
         
         self.adj_list[v] = []
-        
+
+
     def add_edge(self, u: str, v: str) -> None:
         """
         Add edge to the graph
@@ -99,6 +100,7 @@ class UndirectedGraph:
         
         # Remove parameterized vertex from adjacency lists
         del self.adj_list[v]
+
 
     def get_vertices(self) -> []:
         """
@@ -161,8 +163,9 @@ class UndirectedGraph:
         if v_start not in self.adj_list:
             return path
 
-        visited = set()
+        # Use a stack ADT to store neighboring vertices
         stack = deque()
+        visited = set()
 
         stack.append(v_start)
 
@@ -188,6 +191,7 @@ class UndirectedGraph:
 
         return path
 
+
     def bfs(self, v_start, v_end=None) -> []:
         """
         Return list of vertices visited during BFS search
@@ -198,8 +202,9 @@ class UndirectedGraph:
         if v_start not in self.adj_list:
             return path
 
-        visited = set()
+        # Use a queue ADT to store neighboring vertices
         queue = deque()
+        visited = set()
 
         queue.append(v_start)
 
@@ -234,7 +239,12 @@ class UndirectedGraph:
         while len(vertices) > 0:
             
             vertex = vertices.pop()
+
+            # Perform DFS to return a set of all components connected to
+            # a given vertex
             connected = set(self.dfs(vertex))
+            
+            # Remove the connected components from the set of unvisited vertices
             vertices -= connected
             connected_count += 1
 
@@ -245,29 +255,42 @@ class UndirectedGraph:
         """
         Return True if graph contains a cycle, False otherwise
         """
-        for vertex in self.adj_list:
-            if self.has_cycle_rec(vertex):
+        unvisited = {vertex for vertex in self.adj_list}
+        visited = set()
+
+        # Test every unvisited vertex
+        while len(unvisited) > 0:
+
+            vertex = unvisited.pop()
+
+            if self.has_cycle_rec(vertex, unvisited, visited):
                 return True
         
         return False
 
-    def has_cycle_rec(self, vertex, last_visited=None, visited=None):
-        """
-        """
-        if visited is None:
-            visited = set()
 
+    def has_cycle_rec(self, vertex, unvisited, visited, last_visited=None):
+        """
+        Recursive helper method for has_cycle
+        """
+        # Move vertex from set of unvisited to visited vertices
+        unvisited.discard(vertex)
         visited.add(vertex)
 
         for neighbor in self.adj_list[vertex]:
             
+            # Base case: If the neighboring vertex has already been visited and
+            # it is not the parent vertex, then there is a cycle
             if neighbor in visited and neighbor != last_visited:
                 return True
 
+            # Recursive case: check whether there is a cycle at the neighboring
+            # vertex
             if neighbor not in visited:
-                if self.has_cycle_rec(neighbor, vertex, visited):
+                if self.has_cycle_rec(neighbor, unvisited, visited, vertex):
                     return True
 
+        # Base case: If vertex has no neighbors to process, there is no cycle
         return False
 
 
