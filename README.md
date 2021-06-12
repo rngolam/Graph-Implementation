@@ -27,6 +27,7 @@ for i in range(5):
     print(f'DIJKSTRA {i} {g.dijkstra(i)}')
 ```
 ![image](https://user-images.githubusercontent.com/69094063/121775107-42490700-cb4b-11eb-909f-c27c1c89e703.png)
+
 Output:
 ```
 dijkstra() example 1
