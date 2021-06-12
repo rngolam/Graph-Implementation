@@ -1,8 +1,3 @@
-# Course: CS261 - Data Structures
-# Author: Richard Ngo-Lam
-# Assignment: 6
-# Description: Implements a DirectedGraph class.
-
 import heapq
 from collections import deque
 
@@ -18,7 +13,6 @@ class DirectedGraph:
     def __init__(self, start_edges=None):
         """
         Store graph info as adjacency matrix
-        DO NOT CHANGE THIS METHOD IN ANY WAY
         """
         self.v_count = 0
         self.adj_matrix = []
@@ -37,7 +31,6 @@ class DirectedGraph:
     def __str__(self):
         """
         Return content of the graph in human-readable form
-        DO NOT CHANGE THIS METHOD IN ANY WAY
         """
         if self.v_count == 0:
             return 'EMPTY GRAPH\n'
@@ -336,7 +329,7 @@ class DirectedGraph:
 
 if __name__ == '__main__':
 
-    print("\nPDF - method add_vertex() / add_edge example 1")
+    print("\nadd_vertex() / add_edge example 1")
     print("----------------------------------------------")
     g = DirectedGraph()
     print(g)
@@ -351,7 +344,7 @@ if __name__ == '__main__':
     print(g)
 
 
-    print("\nPDF - method get_edges() example 1")
+    print("\nget_edges() example 1")
     print("----------------------------------")
     g = DirectedGraph()
     print(g.get_edges(), g.get_vertices(), sep='\n')
@@ -361,7 +354,7 @@ if __name__ == '__main__':
     print(g.get_edges(), g.get_vertices(), sep='\n')
 
 
-    print("\nPDF - method is_valid_path() example 1")
+    print("\nis_valid_path() example 1")
     print("--------------------------------------")
     edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
              (3, 1, 5), (2, 1, 23), (3, 2, 7)]
@@ -371,7 +364,7 @@ if __name__ == '__main__':
         print(path, g.is_valid_path(path))
 
 
-    print("\nPDF - method dfs() and bfs() example 1")
+    print("\ndfs() and bfs() example 1")
     print("--------------------------------------")
     edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
              (3, 1, 5), (2, 1, 23), (3, 2, 7)]
@@ -380,7 +373,7 @@ if __name__ == '__main__':
         print(f'{start} DFS:{g.dfs(start)} BFS:{g.bfs(start)}')
 
 
-    print("\nPDF - method has_cycle() example 1")
+    print("\nhas_cycle() example 1")
     print("----------------------------------")
     edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
              (3, 1, 5), (2, 1, 23), (3, 2, 7)]

@@ -1,8 +1,3 @@
-# Course: CS261 - Data Structures
-# Author: Richard Ngo-Lam
-# Assignment: 6
-# Description: Implements an UndirectedGraph class.
-
 from collections import deque
 
 class UndirectedGraph:
@@ -17,7 +12,6 @@ class UndirectedGraph:
     def __init__(self, start_edges=None):
         """
         Store graph info as adjacency list
-        DO NOT CHANGE THIS METHOD IN ANY WAY
         """
         self.adj_list = dict()
 
@@ -30,7 +24,6 @@ class UndirectedGraph:
     def __str__(self):
         """
         Return content of the graph in human-readable form
-        DO NOT CHANGE THIS METHOD IN ANY WAY
         """
         out = [f'{v}: {self.adj_list[v]}' for v in self.adj_list]
         out = '\n  '.join(out)
@@ -296,7 +289,7 @@ class UndirectedGraph:
 
 if __name__ == '__main__':
 
-    print("\nPDF - method add_vertex() / add_edge example 1")
+    print("\nmethod add_vertex() / add_edge example 1")
     print("----------------------------------------------")
     g = UndirectedGraph()
     print(g)
@@ -313,7 +306,7 @@ if __name__ == '__main__':
     print(g)
 
 
-    print("\nPDF - method remove_edge() / remove_vertex example 1")
+    print("\nmethod remove_edge() / remove_vertex example 1")
     print("----------------------------------------------------")
     g = UndirectedGraph(['AB', 'AC', 'BC', 'BD', 'CD', 'CE', 'DE'])
     g.remove_vertex('DOES NOT EXIST')
@@ -324,7 +317,7 @@ if __name__ == '__main__':
     print(g)
 
 
-    print("\nPDF - method get_vertices() / get_edges() example 1")
+    print("\nmethod get_vertices() / get_edges() example 1")
     print("---------------------------------------------------")
     g = UndirectedGraph()
     print(g.get_edges(), g.get_vertices(), sep='\n')
@@ -332,7 +325,7 @@ if __name__ == '__main__':
     print(g.get_edges(), g.get_vertices(), sep='\n')
 
 
-    print("\nPDF - method is_valid_path() example 1")
+    print("\nmethod is_valid_path() example 1")
     print("--------------------------------------")
     g = UndirectedGraph(['AB', 'AC', 'BC', 'BD', 'CD', 'CE', 'DE'])
     test_cases = ['ABC', 'ADE', 'ECABDCBE', 'ACDECB', '', 'D', 'Z']
@@ -340,7 +333,7 @@ if __name__ == '__main__':
         print(list(path), g.is_valid_path(list(path)))
 
 
-    print("\nPDF - method dfs() and bfs() example 1")
+    print("\nmethod dfs() and bfs() example 1")
     print("--------------------------------------")
     edges = ['AE', 'AC', 'BE', 'CE', 'CD', 'CB', 'BD', 'ED', 'BH', 'QG', 'FG']
     g = UndirectedGraph(edges)
@@ -353,7 +346,7 @@ if __name__ == '__main__':
         print(f'{v1}-{v2} DFS:{g.dfs(v1, v2)} BFS:{g.bfs(v1, v2)}')
 
 
-    print("\nPDF - method count_connected_components() example 1")
+    print("\nmethod count_connected_components() example 1")
     print("---------------------------------------------------")
     edges = ['AE', 'AC', 'BE', 'CE', 'CD', 'CB', 'BD', 'ED', 'BH', 'QG', 'FG']
     g = UndirectedGraph(edges)
@@ -370,7 +363,7 @@ if __name__ == '__main__':
     print()
 
 
-    print("\nPDF - method has_cycle() example 1")
+    print("\nmethod has_cycle() example 1")
     print("----------------------------------")
     edges = ['AE', 'AC', 'BE', 'CE', 'CD', 'CB', 'BD', 'ED', 'BH', 'QG', 'FG']
     g = UndirectedGraph(edges)
