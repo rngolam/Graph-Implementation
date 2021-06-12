@@ -391,7 +391,7 @@ if __name__ == '__main__':
     print('\n', g)
 
 
-    print("\nPDF - dijkstra() example 1")
+    print("\ndijkstra() example 1")
     print("--------------------------")
     edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
              (3, 1, 5), (2, 1, 23), (3, 2, 7)]
