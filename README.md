@@ -54,6 +54,7 @@ DIJKSTRA 3 [32, 5, 7, 0, 20]
 DIJKSTRA 4 [12, 22, inf, inf, 0]
 ```
 
+
 The Undirected Graph class is implemented using a vertex adjacency list and supports the following interface:
 * add_vertex
 * add_edge
