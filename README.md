@@ -1,6 +1,6 @@
 # Graphs
 
-An implementation of Undirected and Directed Graph data structures written in Python.
+An implementation of Undirected and Directed Graph abstract data types written in Python.
 
 The Directed Graph class is implemented using a vertex adjacency matrix and supports the following interface:
 * add_vertex
