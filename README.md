@@ -14,6 +14,45 @@ The Directed Graph class is implemented using a vertex adjacency matrix and supp
 * has_cycle
 * dijkstra (returns a list of the shortest path to all vertices using Dijkstra's Algorithm)
 
+Example Input:
+```python
+edges = [(0, 1, 10), (4, 0, 12), (1, 4, 15), (4, 3, 3),
+         (3, 1, 5), (2, 1, 23), (3, 2, 7)]
+g = DirectedGraph(edges)
+for i in range(5):
+    print(f'DIJKSTRA {i} {g.dijkstra(i)}')
+g.remove_edge(4, 3)
+print('\n', g)
+for i in range(5):
+    print(f'DIJKSTRA {i} {g.dijkstra(i)}')
+```
+Output:
+```
+dijkstra() example 1
+--------------------------
+DIJKSTRA 0 [0, 10, 35, 28, 25]
+DIJKSTRA 1 [27, 0, 25, 18, 15]
+DIJKSTRA 2 [50, 23, 0, 41, 38]
+DIJKSTRA 3 [32, 5, 7, 0, 20]
+DIJKSTRA 4 [12, 8, 10, 3, 0]
+
+ GRAPH (5 vertices):
+   | 0  1  2  3  4
+------------------
+ 0 | 0 10  0  0  0
+ 1 | 0  0  0  0 15
+ 2 | 0 23  0  0  0
+ 3 | 0  5  7  0  0
+ 4 |12  0  0  0  0
+
+DIJKSTRA 0 [0, 10, inf, inf, 25]
+DIJKSTRA 1 [27, 0, inf, inf, 15]
+DIJKSTRA 2 [50, 23, 0, inf, 38]
+DIJKSTRA 3 [32, 5, 7, 0, 20]
+DIJKSTRA 4 [12, 22, inf, inf, 0]
+```
+
+
 
 The Undirected Graph class is implemented using a vertex adjacency list and supports the following interface:
 * add_vertex
